@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import React, {useEffect, useState, useReducer } from 'react';
 import './App.css';
+import AppRouter from './AppRouter';
+import { AppContextProvider, appInitData } from './contexts/AppContext';
+
+const appReducer = (state, { action, params }) => {
+  switch(action){
+    case 'LOG_USER':
+      return { ...state, isLoggedIn: true};
+    case 'LOGOUT_USER':
+      return { ...state, isLoggedIn: false};
+    default:
+        return { ...state, ...params };
+  }
+}
 
 function App() {
+  const [ data, dispatch ] = useReducer(appReducer, appInitData);
+  
   return (
+    <AppContextProvider value={{data, dispatch }}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppRouter/>
     </div>
+    </AppContextProvider>
   );
 }
 
