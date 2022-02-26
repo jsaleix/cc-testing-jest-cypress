@@ -1,10 +1,10 @@
 import authHeader from "./auth-header";
 
-class TodolistService{
+class ItemService{
 
-    getLists = async () => {
+    getItems = async (todolistId) => {
         try{
-            let res = await fetch(`${process.env.REACT_APP_HTTP}/todolist`,
+            let res = await fetch(`${process.env.REACT_APP_HTTP}/todolist/items/${todolistId}`,
             {
                 method: 'GET',
                 headers: {
@@ -18,33 +18,14 @@ class TodolistService{
             }
             return res.json();
         }catch(e){
+            console.log(e)
             return null;
         }
     }
 
-    getList = async (id) => {
+    add = async (todolistId, item) => {
         try{
-            let res = await fetch(`${process.env.REACT_APP_HTTP}/todolist/${id}`,
-            {
-                method: 'GET',
-                headers: {
-                    ...authHeader(),
-                    "Accept": "*/*",
-                    "Content-Type": "application/json"
-                }
-            });
-            if(res.status !== 200){
-                throw new Error('Wrong status')
-            }
-            return res.json();
-        }catch(e){
-            return null;
-        }
-    }
-
-    create = async (name) => {
-        try{
-            let res = await fetch(`${process.env.REACT_APP_HTTP}/todolist`,
+            let res = await fetch(`${process.env.REACT_APP_HTTP}/todolist/items/${todolistId}`,
             {
                 method: 'POST',
                 headers: {
@@ -52,7 +33,7 @@ class TodolistService{
                     "Accept": "*/*",
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ name })
+                body: JSON.stringify({item})
             });
             if(res.status !== 201){
                 throw new Error('Wrong status')
@@ -65,4 +46,4 @@ class TodolistService{
 
 }
 
-export default new TodolistService();
+export default new ItemService();

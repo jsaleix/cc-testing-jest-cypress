@@ -1,0 +1,84 @@
+.todolist{
+    width: 100%;
+
+    .no-list{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5em 10px;
+    }
+
+    .header{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        border-bottom: 1px solid gray;
+    }
+
+    .list-item{
+        padding: 10px 20px;
+        border: 1px solid gray;
+        background-color: rgb(194, 194, 194);
+        cursor: pointer;
+        transition: 0.5s;
+
+        &:nth-child(odd){
+            background-color: rgb(184, 184, 184);  
+            &:hover{
+                background-color: rgb(143, 143, 143);
+            }
+        }
+        
+        &:hover{
+            background-color: rgb(180, 180, 180);
+        }
+    }
+}
+
+.create-todolist-modal{
+    z-index: 1000 !important;
+    background-color: white;
+    -webkit-box-shadow: 1px 6px 22px -9px #000000; 
+    box-shadow: 1px 6px 22px -9px #000000;
+    position: absolute;
+    border: 1px solid rgb(207, 207, 207);
+    top: 40%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0px;
+
+    .create-modal-header{
+        padding: 10px 0px;
+        border-bottom: 1px solid rgb(207, 207, 207);
+        margin-bottom: 10px;
+        h2{
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    .create-modal-content{
+        width: 100%;
+        padding: 10px 40px;
+
+        input, textarea{
+            padding: 5px 0px;
+            width: 100%;
+            margin-bottom: 5px;
+            resize: none;
+        }
+
+    }
+
+
+}

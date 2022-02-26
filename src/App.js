@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useReducer } from 'react';
-import './App.css';
+import './styles/App.scss';
 import AppRouter from './AppRouter';
 import { AppContextProvider, appInitData } from './contexts/AppContext';
 

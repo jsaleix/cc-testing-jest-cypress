@@ -5,7 +5,9 @@ import 'react-notifications/lib/notifications.css';
 import { useAppContext } from './contexts/AppContext';
 
 import Login from './components/Login/Login';
+import Header from './components/Header/Header';
 
+import Todolists from './pages/Todolists/Todolists';
 import Todolist from './pages/Todolist/Todolist';
 
 export default function AppRouter(){
@@ -13,14 +15,16 @@ export default function AppRouter(){
     
     return(
         <>
+            <Header/>
             <Router>
                 {!data.isLoggedIn
                 ? <Login/> 
                 : <Switch>
-                    <Route path="/" component={Todolist} />
+                    <Route path="/todolist/:listId" component={Todolist} />
+                    <Route path="/" component={Todolists} />
                 </Switch>}
-                <NotificationContainer/>
             </Router>
+            <NotificationContainer/>
         </>
     )
 }
