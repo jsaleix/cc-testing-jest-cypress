@@ -24,17 +24,17 @@ class AuthService{
 
     signup = async (userObj) => {
         try{
-            let res = await fetch(`${process.env.REACT_APP_HTTP}/signup`,
+            let res = await fetch(`${process.env.REACT_APP_HTTP}/auth/signup`,
             {
                 method: 'POST',
                 headers: {
                     "Accept": "*/*",
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ ...userObj })
+                body: JSON.stringify({ user: userObj })
             });
             if(res.status !== 201){
-                throw new Error('Wrong status')
+                return res.json();
             }
             return true;
         }catch(e){

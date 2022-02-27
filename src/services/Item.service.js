@@ -21,7 +21,7 @@ class ItemService{
             console.log(e)
             return null;
         }
-    }
+    };
 
     add = async (todolistId, item) => {
         try{
@@ -36,6 +36,27 @@ class ItemService{
                 body: JSON.stringify({item})
             });
             if(res.status !== 201){
+                throw new Error('Wrong status')
+            }
+            return true;
+        }catch(e){
+            return null;
+        }
+    };
+
+    update = async (todolistId, item) => {
+        try{
+            let res = await fetch(`${process.env.REACT_APP_HTTP}/todolist/items/${todolistId}`,
+            {
+                method: 'PATCH',
+                headers: {
+                    ...authHeader(),
+                    "Accept": "*/*",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({item})
+            });
+            if(res.status !== 200){
                 throw new Error('Wrong status')
             }
             return true;

@@ -1,0 +1,17 @@
+.login-page{
+    display: flex;
+    justify-content: space-between;
+
+    .login{
+        width: calc(98%/2);
+        padding: 20px 10px;
+        border: 1px solid gray;
+        height: fit-content;
+    }
+
+    .register{
+        width: calc(98%/2);
+        border: 1px solid gray;
+        padding: 20px 10px;
+    }
+}

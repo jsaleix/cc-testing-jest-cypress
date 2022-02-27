@@ -15,6 +15,19 @@ class Helpers{
         }
     }
 
+    getTokenContent = () => {
+        try{            
+            let token = this.getToken();
+            if(!token) throw new Error('Missing token');
+            token = jwt_decode(token.token);
+            return token;
+
+        }catch(e){
+            //console.log(e)
+            return false;
+        }
+    }
+
 }
 
 export default new Helpers();

@@ -5,4 +5,15 @@ header{
     padding: 10px 5% ;
     margin: 0;
     border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div{
+        display: flex;
+        align-items: center;
+        p{
+            margin-right: 10px;
+        }
+    }
 }
