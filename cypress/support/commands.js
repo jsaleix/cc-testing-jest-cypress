@@ -23,3 +23,25 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import '@testing-library/cypress/add-commands';
+
+Cypress.Commands.add('login', () => {
+    // cy.visit('/');
+    // cy.get('[data-testid=login-email]')
+    //     .type('samplee@test.fr')
+    //     .should('have.value', 'samplee@test.fr');
+    // cy.get('[data-testid=login-password]').type('azerty123');
+    // cy.get('[data-testid=login-button]').click();
+    // cy.get('#root').should('contain', 'You are now logged in');
+    // cy.contains('Login').should('not.exist')
+
+     cy.request({
+        method: 'POST',
+        url: 'http://localhost:3001/auth/login',
+        body:{
+            email: 'samplee@test.fr',
+            password: 'azerty123'
+        }
+    })
+    .then( res => { window.localStorage.setItem('token', JSON.stringify(res.body) )} );
+});

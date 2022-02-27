@@ -19,7 +19,19 @@ export default function Login(){
 
     const log = async () => {
         let { email, password } = entries;
+        if( !email && !password){
+            NotificationManager.error('Missing credentials', 'Error')
+            return;
+        }
 
+        if( !email ){
+            NotificationManager.error('Missing email', 'Error')
+            return;
+        }
+        if( !password ) {
+            NotificationManager.error('Missing password', 'Error')
+            return;
+        }
         let res = await AuthService.login(email, password);
         if(res){
             localStorage.setItem('token', JSON.stringify(res));
@@ -67,22 +79,26 @@ export default function Login(){
     return(
         <div className='login-page container'>
             <div className='login'>
+                <h2>Login</h2>
                 <input
+                    data-testid="login-email"
                     placeholder='Email'
                     onChange={e => setEntries({...entries, email: e.target.value})}
                     value={entries.email}
                     required
                     type="mail"/>
                 <input
+                    data-testid="login-password"
                     placeholder='Password'
                     onChange={e => setEntries({...entries, password: e.target.value})}
                     value={entries.password}
                     required
                     type="password" />
-                <button onClick={log}>Login</button>
+                <button onClick={log} data-testid="login-button">Login</button>
             </div>
 
             <div className='register'>
+                <h2>Need an account ?</h2>
                 <input 
                     placeholder='Email'
                     onChange={e => setRegisterEntries({...registerEntries, email: e.target.value})}
@@ -119,7 +135,7 @@ export default function Login(){
                     value={registerEntries.passwordBis}
                     required
                     type="password" />
-                <button onClick={signup}>Signup</button>
+                <button onClick={signup} data-testid="signup-button" >Sign Up</button>
             </div>
         </div>
     )

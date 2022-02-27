@@ -2,6 +2,7 @@ import React, {useEffect, useState, useReducer } from 'react';
 import './styles/App.scss';
 import AppRouter from './AppRouter';
 import { AppContextProvider, appInitData } from './contexts/AppContext';
+import 'whatwg-fetch';
 
 const appReducer = (state, { action, params }) => {
   switch(action){
