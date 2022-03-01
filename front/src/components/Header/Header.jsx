@@ -11,7 +11,7 @@ export default function Header(){
     }
 
     return(
-        <header className='container'>
+        <header className='container' id="header">
             <h1 
                 style={{cursor: 'pointer'}}
                 onClick={() => window.location.href = '/' }>My list</h1>

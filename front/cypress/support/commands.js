@@ -45,3 +45,19 @@ Cypress.Commands.add('login', () => {
     })
     .then( res => { window.localStorage.setItem('token', JSON.stringify(res.body) )} );
 });
+
+//const COMMAND_DELAY = Cypress.env('COMMAND_DELAY') || 0;
+const COMMAND_DELAY = 1000;
+if (COMMAND_DELAY > 0) {
+    for (const command of ['visit', 'click', 'trigger', 'type', 'clear', 'reload', 'contains']) {
+        Cypress.Commands.overwrite(command, (originalFn, ...args) => {
+            const origVal = originalFn(...args);
+
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(origVal);
+                }, COMMAND_DELAY);
+            });
+        });
+    }
+}

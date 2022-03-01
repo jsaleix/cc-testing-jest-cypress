@@ -1,6 +1,6 @@
 import { click } from "@testing-library/user-event/dist/click";
 
-describe('Login tests', () => {
+describe('00 - Login tests', () => {
     beforeEach(() => {
         cy.visit('/');
     });
