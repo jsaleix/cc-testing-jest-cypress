@@ -5,7 +5,8 @@ const itemSchema = mongoose.Schema({
     name: { type: String, required: true, unique: false},
     content: { type: String, required: true, unique: false},
     todolist: { type: mongoose.Schema.Types.ObjectId, ref: 'TodoList', required: true},
-    creationDate: { type: Date, required: true, default: Date.now }
+    creationDate: { type: Date, required: true, default: Date.now },
+    done: { type: Boolean, default: false}
 });
 
 itemSchema.plugin(uniqueValidator);

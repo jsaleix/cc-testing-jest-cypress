@@ -39,3 +39,11 @@ exports.deleteItem = (req, res, next) => {
     .then(() => res.status(204).json('Item successfully deleted!'))
     .catch( e => res.status(400).json(e) );
 };
+
+exports.checkItem = (req, res, next) => {
+    let todolist = req.params.id;
+
+    Item.updateOne({ todolist }, { checked: true })
+        .then( () => res.status(200).json({ message: 'Item checked!'}))
+        .catch( error => res.status(400).json(error));
+};

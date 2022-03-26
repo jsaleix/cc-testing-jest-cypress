@@ -18,6 +18,7 @@ const validItem = require('../middlewares/item/validItem');
 
 //Routes
 router.post('/items/:id', auth, isOwner, validItem, itemCntroller.addItem);
+router.patch('/items/check/:id', auth, isOwner, itemCntroller.checkItem);
 router.patch('/items/:id', auth, isOwner, validItem, itemCntroller.updateItem);
 router.get('/items/:id', auth, isOwner, itemCntroller.listItems);
 router.delete('/items/:id', auth, isOwner, itemCntroller.deleteItem);
