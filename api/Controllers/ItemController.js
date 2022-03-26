@@ -17,7 +17,7 @@ exports.listItems = async (req, res, next) =>{
         return;
     }
     try{
-        const items = await Item.find({todolist: req.params.id});
+        const items = await Item.find({todolist: req.params.id}).sort({done: 1});
         res.status(200).json({ items: items||[] })
     }catch(e){
         res.status(400).json({ message: 'An error occured' })
@@ -40,15 +40,15 @@ exports.deleteItem = (req, res, next) => {
     .catch( e => res.status(400).json(e) );
 };
 
-exports.checkItem = (req, res, next) => {
+exports.checkItem = async (req, res, next) => {
     let itemId = req.params.itemId;
-    let item = Item.findOne({_id: itemId});
+    let item = await Item.findOne({_id: itemId});
     if( !item ){
         res.status(400).json('Item not found')
         return;
     }
 
-    Item.updateOne(item, { done: !item.done})
+    Item.updateOne(item, { done: !item.done })
         .then( () => res.status(200).json({ message: 'Item checked!'}))
         .catch( error => res.status(400).json(error));
     

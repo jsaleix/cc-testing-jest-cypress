@@ -79,10 +79,13 @@ export default function Todolist(){
 
     const checkItem = async (id) => {
         let res = await ItemService.toggleCheck(listId, id);
-        if(res){
-            await getItems();
-        }else{
+        if(!res){
             NotificationManager.error('Could not check this item', 'Error');
+        }else{
+            let tmpItems = [...items];
+            let toChange = tmpItems.find( it => it._id === id);
+            toChange.done = !toChange.done;
+            setItems(tmpItems);
         }
     };
     
