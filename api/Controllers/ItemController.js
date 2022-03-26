@@ -41,9 +41,18 @@ exports.deleteItem = (req, res, next) => {
 };
 
 exports.checkItem = (req, res, next) => {
-    let todolist = req.params.id;
+    let itemId = req.params.itemId;
+    let item = Item.findOne({_id: itemId});
+    if( !item ){
+        res.status(400).json('Item not found')
+        return;
+    }
 
-    Item.updateOne({ todolist }, { checked: true })
+    Item.updateOne(item, { done: !item.done})
         .then( () => res.status(200).json({ message: 'Item checked!'}))
         .catch( error => res.status(400).json(error));
+    
+    // Item.updateOne({ todolist }, { checked: true })
+    //     .then( () => res.status(200).json({ message: 'Item checked!'}))
+    //     .catch( error => res.status(400).json(error));
 };

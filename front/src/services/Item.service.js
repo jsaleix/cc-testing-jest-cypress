@@ -65,6 +65,25 @@ class ItemService{
         }
     }
 
+    toggleCheck = async (todolistId, itemId) => {
+        try{
+            let res = await fetch(`${process.env.REACT_APP_HTTP}/todolist/items/check/${todolistId}/${itemId}`,
+            {
+                method: 'PATCH',
+                headers: {
+                    ...authHeader(),
+                    "Accept": "*/*",
+                    "Content-Type": "application/json"
+                }
+            });
+            if(res.status !== 200){
+                throw new Error('Wrong status')
+            }
+            return true;
+        }catch(e){
+            return null;
+        }
+    }
 }
 
 export default new ItemService();

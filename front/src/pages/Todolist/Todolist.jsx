@@ -8,18 +8,27 @@ import { NotificationManager } from 'react-notifications';
 import {useParams} from 'react-router-dom';
 import moment from 'moment';
 
-function Item({data, updateAction}){
+function Item({data, updateAction, checkAction}){
+
+    const checkItem = (e) => {
+        e.stopPropagation();
+        checkAction(data._id);
+    };
+
     return(
         <div className='list-item'>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <div onClick={updateAction} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', alignContent: 'center'}}>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <h3>{data?.name}</h3>
                     <p>{data.content}</p>
                 </div>
-                <svg onClick={updateAction} width="20" height="20" viewBox="0 0 566 566" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M416.207 267.602L465.531 218.278L347.718 100.465L298.394 149.789L168.329 20.0384C143.824 -4.46657 103.925 -4.46657 79.42 20.0384L19.7283 79.7301C-4.77667 104.235 -4.77667 144.134 19.7283 168.639L149.479 298.39L0.25 447.933V565.746H118.063L267.606 416.203L397.357 545.953C427.203 575.799 467.416 564.803 486.266 545.953L545.958 486.262C570.463 461.757 570.463 421.858 545.958 397.353L416.207 267.602ZM194.405 253.778L64.34 124.028L123.717 64.3359L163.617 104.235L126.545 141.621L170.843 185.918L208.228 148.533L253.783 194.087L194.405 253.778ZM441.968 501.656L312.218 371.905L371.909 312.213L417.463 357.768L380.078 395.153L424.375 439.451L461.761 402.065L501.66 441.964L441.968 501.656ZM556.639 127.169C559.552 124.263 561.862 120.81 563.439 117.01C565.015 113.209 565.827 109.135 565.827 105.021C565.827 100.906 565.015 96.8317 563.439 93.0311C561.862 89.2306 559.552 85.7782 556.639 82.8718L483.124 9.35676C468.358 -5.40907 447.938 0.245925 438.827 9.35676L381.334 66.8493L499.147 184.662L556.639 127.169Z" 
-                    fill="white"/>
-                </svg>
+                <div style={{display: 'flex', height: '100%', alignItems: 'center'}}>
+                    <svg onClick={updateAction} width="40" height="40" viewBox="0 0 566 566" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M416.207 267.602L465.531 218.278L347.718 100.465L298.394 149.789L168.329 20.0384C143.824 -4.46657 103.925 -4.46657 79.42 20.0384L19.7283 79.7301C-4.77667 104.235 -4.77667 144.134 19.7283 168.639L149.479 298.39L0.25 447.933V565.746H118.063L267.606 416.203L397.357 545.953C427.203 575.799 467.416 564.803 486.266 545.953L545.958 486.262C570.463 461.757 570.463 421.858 545.958 397.353L416.207 267.602ZM194.405 253.778L64.34 124.028L123.717 64.3359L163.617 104.235L126.545 141.621L170.843 185.918L208.228 148.533L253.783 194.087L194.405 253.778ZM441.968 501.656L312.218 371.905L371.909 312.213L417.463 357.768L380.078 395.153L424.375 439.451L461.761 402.065L501.66 441.964L441.968 501.656ZM556.639 127.169C559.552 124.263 561.862 120.81 563.439 117.01C565.015 113.209 565.827 109.135 565.827 105.021C565.827 100.906 565.015 96.8317 563.439 93.0311C561.862 89.2306 559.552 85.7782 556.639 82.8718L483.124 9.35676C468.358 -5.40907 447.938 0.245925 438.827 9.35676L381.334 66.8493L499.147 184.662L556.639 127.169Z" 
+                        fill="white"/>
+                    </svg>
+                    <input style={{height: '40px', marginLeft: '10px'}} checked={data.done} onClick={checkItem} type="checkbox"/>
+                </div>
             </div>
             <p className='date'><i>Added on {moment(data.creationDate).format('DD-MM-YYYY')}</i></p>
         </div>
@@ -67,6 +76,15 @@ export default function Todolist(){
             setUpdateModalLoading(false);
         }
     }
+
+    const checkItem = async (id) => {
+        let res = await ItemService.toggleCheck(listId, id);
+        if(res){
+            await getItems();
+        }else{
+            NotificationManager.error('Could not check this item', 'Error');
+        }
+    };
     
     const getItems = async () => {
         let res = await ItemService.getItems(listId);
@@ -115,6 +133,7 @@ export default function Todolist(){
             <div className='list container'>
                 {items.map( i => <Item 
                                     data={i} 
+                                    checkAction={checkItem}
                                     updateAction={() => {setToUpdate(i); setUpdateModal(true)}} />)}
             </div>
             :
