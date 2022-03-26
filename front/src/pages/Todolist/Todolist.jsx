@@ -162,11 +162,13 @@ export default function Todolist(){
                 </div>
                 <div className='create-modal-content'>
                     <input 
+                        data-testid="create-name"
                         value={modalEntries.name}
                         onChange={e => setModalEntries({...modalEntries, name: e.target.value})}
                         type="text" 
                         placeholder='Name'/>
                     <textarea 
+                        data-testid="create-content"
                         value={modalEntries.content}
                         onChange={e => setModalEntries({...modalEntries, content: e.target.value})}
                         type="text" 
@@ -204,12 +206,14 @@ export default function Todolist(){
                     <h2>Update</h2>
                 </div>
                 <div className='create-modal-content'>
-                    <input 
+                    <input
+                        data-testid="update-name"
                         value={toUpdate.name}
                         onChange={e => setToUpdate({...toUpdate, name: e.target.value})}
                         type="text" 
                         placeholder='Name'/>
-                    <textarea 
+                    <textarea
+                        data-testid="update-content"
                         value={toUpdate.content}
                         onChange={e => setToUpdate({...toUpdate, content: e.target.value})}
                         type="text" 
