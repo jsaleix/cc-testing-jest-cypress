@@ -5,7 +5,6 @@ const moment = require('moment');
 const User = require('../models/User');
 
 exports.signup = async (req, res, next) => {
-    console.log('here')
     try{
         let password = await bcrypt.hash(req.body.user.password, 10);
 

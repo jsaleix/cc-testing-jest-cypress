@@ -100,36 +100,42 @@ export default function Login(){
             <div className='register'>
                 <h2>Need an account ?</h2>
                 <input 
+                    data-testid="register-email"
                     placeholder='Email'
                     onChange={e => setRegisterEntries({...registerEntries, email: e.target.value})}
                     value={registerEntries.email}
                     required
                     type="mail"/>
                 <input 
+                    data-testid="register-firstname"
                     placeholder='Firstname'
                     onChange={e => setRegisterEntries({...registerEntries, firstname: e.target.value})}
                     value={registerEntries.firstname}
                     required
                     type="text"/>
-                <input 
+                <input
+                    data-testid="register-lastname"
                     placeholder='Lastname'
                     onChange={e => setRegisterEntries({...registerEntries, lastname: e.target.value})}
                     value={registerEntries.lastname}
                     required
                     type="text"/>
                 <input 
+                    data-testid="register-birthdate"
                     placeholder='Birthdate'
                     onChange={e => setRegisterEntries({...registerEntries, birthdate: e.target.value})}
                     value={registerEntries.birthdate}
                     required
                     type="date"/>
                 <input
+                    data-testid="register-password"
                     placeholder='Password'
                     onChange={e => setRegisterEntries({...registerEntries, password: e.target.value})}
                     value={registerEntries.password}
                     required
                     type="password" />
                 <input
+                    data-testid="register-password-bis"
                     placeholder='Password confirmation'
                     onChange={e => setRegisterEntries({...registerEntries, passwordBis: e.target.value})}
                     value={registerEntries.passwordBis}

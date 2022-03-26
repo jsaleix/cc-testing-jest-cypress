@@ -1,4 +1,4 @@
-describe( '02 - list', () => {
+describe( '01 - list', () => {
     beforeEach(() => {
         cy.login();
         cy.visit('/');
