@@ -6,6 +6,31 @@ describe( '03 - check item', () => {
     });
 
     it( 'Display item update modal', () => {
+        cy.get('.list-item')
+            .first()
+            .find('.item-check-input')
+            .invoke('attr', 'checked')
+            .then( el => {
+                    
+                cy.get('.list-item')
+                    .first()
+                    .find('.item-check-input')
+                    .click();
+                
+                cy.reload();
+
+                if(!el){
+                    cy.get('.list-item')
+                    .first()
+                    .find('.item-check-input')
+                    .should('be.checked');
+                }else{
+                    cy.get('.list-item')
+                        .first()
+                        .find('.item-check-input')
+                        .should('not.be.checked');
+                }
+            });
 
     });
 
