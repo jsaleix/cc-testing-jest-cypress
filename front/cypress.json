@@ -1,5 +1,13 @@
 {
     "baseUrl": "http://localhost:3000",
     "video":false,
-    "screenshots": false
+    "screenshots": false,
+    "testFiles":[
+        "01 user/register_spec.js",
+        "01 user/login_spec.js",
+        "02 todolists/todolists_spec.js",
+        "02 todolists/list_spec.js",
+        "02 todolists/item_creation_spec.js",
+        "02 todolists/item_update_spec.js"
+    ]
 }

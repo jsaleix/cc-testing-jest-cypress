@@ -1,4 +1,4 @@
-describe( '01 - list', () => {
+describe( '02 - list', () => {
     beforeEach(() => {
         cy.login();
         cy.visit('/');
@@ -9,9 +9,9 @@ describe( '01 - list', () => {
         cy.contains('DELETE TODOLIST');
     });
 
-    it( 'Should display no list message', () => {
+    /*it( 'Should display no list message', () => {
         cy.contains('It looks like you have no list yet');
-    });
+    });*/
 
     it( 'Open item creation modal', () =>{
         cy.get('.todolist').find('button').first().click();
